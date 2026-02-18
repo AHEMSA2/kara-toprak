@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kara Toprak – Âşık Veysel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(101, 67, 33, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 40% 20%, rgba(160, 82, 45, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(210, 105, 30, 0.5), transparent);
+        }
+
+        .hero-title {
+            font-size: clamp(64px, 12vw, 120px);
+            font-weight: 900;
+            background: linear-gradient(135deg, #f4a460 0%, #d2691e 50%, #8b4513 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            line-height: 0.95;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 3vw, 28px);
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-style: italic;
+        }
+
+        .hero-author {
+            font-size: clamp(24px, 4vw, 36px);
+            color: #d2691e;
+            font-weight: 600;
+            margin-bottom: 60px;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(210, 105, 30, 0.5);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            padding-top: 8px;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            width: 4px;
+            height: 8px;
+            background: #d2691e;
+            border-radius: 2px;
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(10px);
+            }
+        }
+
+        /* Content Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 16/10;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Content Section */
+        .content-section {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0px;
+            height: 100%;
+            background: transparent;
+        }
+
+        .content-section h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            color: #d2691e;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .content-section p {
+            font-size: clamp(17px, 2.5vw, 21px);
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.9;
+            margin-bottom: 28px;
+            text-align: justify;
+        }
+
+        .content-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-section strong {
+            color: #f4a460;
+            font-weight: 700;
+        }
+
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(210, 105, 30, 0.3);
+        }
+
+        .footer-text {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 60px 30px;
+            }
+
+            .content-section {
+                padding: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 90vh;
+            }
+
+            .hero-title {
+                margin-bottom: 20px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+
+            .content-section p,
+            .gallery {
+                text-align: left;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body::before {
+                display: none;
+            }
+
+            .hero {
+                min-height: auto;
+                page-break-after: always;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Background Audio -->
+<audio id="bgAudio" preload="auto">
+    <source src="img/kara-toprak-audio.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-author">Âşık Veysel</div>
+    <h1 class="hero-title">Kara Toprak</h1>
+    <p class="hero-subtitle">İnsan, Doğa ve Varoluş Üzerine Bir Türkü</p>
+    <div class="scroll-indicator"></div>
+</section>
+
+<!-- Main Content -->
+<div class="container">
+
+    <!-- Gallery Section -->
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="img/asik-veysel.jpg" alt="Âşık Veysel">
+        </div>
+        <div class="gallery-item">
+            <img src="img/kara-toprak-nature.jpg" alt="Kara Toprak - Doğa">
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <h2>Toprakla Başlayan ve Toprakta Biten Yol</h2>
+
+        <p>
+            Âşık Veysel bu eserinde toprağı yalnızca bir doğa unsuru olarak değil, insan hayatının özü olarak anlatır.
+            İnsan topraktan doğar, onunla yaşar ve yine ona döner.
+        </p>
+
+        <p>
+            Toprağa olan hayranlıktan bahsedilmiş nice güzellerin, nice dostların onun yerine koyulamayacağından söz
+            edilmiştir.
+            Bu türkü, hayat boyunca sahip olduğumuzu sandığımız şeylerin geçici olduğunu hatırlatır.
+            Mal, ün, güç ve güzellik zamanla kaybolur.
+            Doğa ise kalıcıdır.
+        </p>
+
+        <p>
+            Toprak burada bir sonu değil, bir döngüyü simgeler.
+            Her canlı ondan doğar, onunla yaşar ve ona döner.
+        </p>
+
+        <p>
+            <strong>"Kara Toprak"</strong>, bize yaşamın en sade gerçeğini hatırlatır:
+            Geldiğimiz yer ile döneceğimiz yer aynıdır.
+        </p>
+    </section>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p class="footer-text">Eğitim Amaçlı Hazırlanmıştır • Kara Toprak: Varoluş ve Doğa • 2026</p>
+</footer>
+
+<script>
+    const audio = document.getElementById('bgAudio');
+    let isPlaying = false;
+    let fullscreenActivated = false;
+
+    // Fullscreen fonksiyonu
+    function goFullscreen() {
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }
+    }
+
+    // Fullscreen'den çık
+    function exitFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+
+    // Fullscreen durumunu kontrol et
+    function isFullscreen() {
+        return !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
+    }
+
+    // Fare tıklaması ile kontrol
+    document.addEventListener('click', (e) => {
+        // Sol tıklama (button 0)
+        if (e.button === 0) {
+            e.preventDefault();
+
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                console.log('🔇 Müzik durduruldu');
+            } else {
+                audio.play();
+                isPlaying = true;
+                console.log('🔊 Müzik başlatıldı');
+            }
+        }
+    }, false);
+
+    // Sağ tıklama (context menu) ile tam ekran kontrolü
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+
+        if (isFullscreen()) {
+            exitFullscreen();
+            console.log('⛶ Tam ekrandan çıkıldı');
+        } else {
+            goFullscreen();
+            fullscreenActivated = true;
+            console.log('⛶ Tam ekran moda girildi');
+        }
+    });
+
+    // İlk kullanıcı etkileşiminde fullscreen yap
+    window.addEventListener('load', () => {
+        if (!fullscreenActivated) {
+            document.addEventListener('click', () => {
+                if (!fullscreenActivated) {
+                    goFullscreen();
+                    fullscreenActivated = true;
+                }
+            }, {once: true});
+
+            document.addEventListener('keydown', () => {
+                if (!fullscreenActivated) {
+                    goFullscreen();
+                    fullscreenActivated = true;
+                }
+            }, {once: true});
+        }
+    });
+
+    // Ses bitince
+    audio.addEventListener('ended', () => {
+        isPlaying = false;
+        console.log('🎵 Müzik bitti');
+    });
+</script>
+</body>
+</html>
